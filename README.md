@@ -27,8 +27,10 @@ AI-powered email triage using GTD methodology. Automatically categorizes Gmail i
 
 Install `gog` CLI:
 ```bash
-# Follow installation instructions at https://github.com/yakitrak/gog
+brew install gogcli
 ```
+
+See [gogcli repository](https://github.com/steipete/gogcli) for more details.
 
 ### 2. Setup GTD Labels (One-Time)
 
