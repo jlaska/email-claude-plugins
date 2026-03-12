@@ -121,6 +121,7 @@ priority_domains:
   - "redhat.com"
 
 # Contact importance overrides
+# importance: "critical" (+40 pts) or "high" (+20 pts)
 contacts:
   - email: "boss@redhat.com"
     name: "Boss Name"

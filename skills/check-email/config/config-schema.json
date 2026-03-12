@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jlaska/email-claude-plugins/skills/check-email/config/config-schema.json",
+  "title": "Email Claude Plugin Configuration",
+  "description": "Configuration schema for the GTD email triage plugin",
+  "type": "object",
+  "properties": {
+    "user": {
+      "description": "User information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User's full name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User's primary email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "User's job title or role"
+        },
+        "organization": {
+          "type": "string",
+          "description": "User's organization or company name"
+        }
+      },
+      "additionalProperties": false
+    },
+    "labels": {
+      "description": "GTD label names (can be customized)",
+      "type": "object",
+      "properties": {
+        "urgent": {
+          "type": "string",
+          "description": "Label for urgent emails requiring immediate attention"
+        },
+        "action": {
+          "type": "string",
+          "description": "Label for emails requiring action"
+        },
+        "reply": {
+          "type": "string",
+          "description": "Label for emails requiring a reply"
+        },
+        "waiting": {
+          "type": "string",
+          "description": "Label for emails waiting on someone else"
+        },
+        "review": {
+          "type": "string",
+          "description": "Label for emails to review/read"
+        },
+        "ignore": {
+          "type": "string",
+          "description": "Label for emails to ignore"
+        }
+      },
+      "additionalProperties": false
+    },
+    "vip_senders": {
+      "description": "List of VIP email addresses (always high priority)",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "email"
+      },
+      "uniqueItems": true
+    },
+    "priority_domains": {
+      "description": "List of priority email domains",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      },
+      "uniqueItems": true
+    },
+    "contacts": {
+      "description": "Contact importance overrides",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact's email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Contact's name"
+          },
+          "importance": {
+            "type": "string",
+            "enum": ["critical", "high"],
+            "description": "Contact importance level: 'critical' (+40 pts) or 'high' (+20 pts)"
+          }
+        },
+        "required": ["email", "importance"],
+        "additionalProperties": false
+      }
+    },
+    "priority_keywords": {
+      "description": "Keywords to identify priority emails",
+      "type": "object",
+      "properties": {
+        "urgent": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Keywords indicating urgent emails"
+        },
+        "action": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Keywords indicating action-required emails"
+        },
+        "reply": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Keywords indicating reply-needed emails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scoring": {
+      "description": "Point values for priority scoring",
+      "type": "object",
+      "properties": {
+        "vip_sender": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails from VIP senders"
+        },
+        "priority_domain": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails from priority domains"
+        },
+        "critical_contact": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails from critical contacts"
+        },
+        "high_contact": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails from high-priority contacts"
+        },
+        "priority_keyword": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails containing priority keywords"
+        },
+        "unread": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for unread emails"
+        },
+        "recent_4h": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails received in last 4 hours"
+        },
+        "direct_to": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails sent directly to user"
+        }
+      },
+      "additionalProperties": false
+    },
+    "thresholds": {
+      "description": "Priority threshold values",
+      "type": "object",
+      "properties": {
+        "high": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum score for HIGH priority"
+        },
+        "medium": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum score for MEDIUM priority"
+        }
+      },
+      "additionalProperties": false
+    },
+    "auto_rules": {
+      "description": "Automatic categorization rules",
+      "type": "object",
+      "properties": {
+        "ignore_patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "subject_contains": {
+                "type": "string",
+                "description": "Pattern to match in subject"
+              },
+              "from_contains": {
+                "type": "string",
+                "description": "Pattern to match in sender"
+              }
+            },
+            "additionalProperties": false,
+            "minProperties": 1
+          },
+          "description": "Patterns that automatically categorize as ignore"
+        },
+        "review_patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "subject_contains": {
+                "type": "string",
+                "description": "Pattern to match in subject"
+              },
+              "from_contains": {
+                "type": "string",
+                "description": "Pattern to match in sender"
+              }
+            },
+            "additionalProperties": false,
+            "minProperties": 1
+          },
+          "description": "Patterns that automatically categorize as review"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

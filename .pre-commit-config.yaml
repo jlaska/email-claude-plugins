@@ -32,6 +32,15 @@ repos:
     hooks:
       - id: gitleaks
 
+  # JSON Schema validation
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.29.4
+    hooks:
+      - id: check-jsonschema
+        name: Validate config schema
+        files: ^skills/check-email/config/defaults\.yaml$
+        args: ["--schemafile", "skills/check-email/config/config-schema.json"]
+
   # Pre-commit hooks - General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
