@@ -23,9 +23,8 @@ AI-powered email triage using GTD methodology. Automatically categorizes Gmail i
 
 ## Installation
 
-### 1. Prerequisites
+### 1. Install `gog` CLI
 
-Install `gog` CLI:
 ```bash
 brew install gogcli
 ```
