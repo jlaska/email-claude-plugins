@@ -1,0 +1,65 @@
+# Default configuration (user config overrides these)
+
+# GTD label names
+labels:
+  urgent: "GTD/Urgent"
+  action: "GTD/Action"
+  reply: "GTD/Reply"
+  waiting: "GTD/Waiting"
+  review: "GTD/Review"
+  ignore: "GTD/Ignore"
+
+# Priority keywords
+priority_keywords:
+  urgent:
+    - "urgent"
+    - "asap"
+    - "critical"
+    - "p0"
+    - "p1"
+    - "outage"
+    - "incident"
+    - "emergency"
+    - "EOD"
+    - "end of day"
+  action:
+    - "action required"
+    - "action needed"
+    - "please review"
+    - "approval needed"
+    - "deadline"
+    - "decision needed"
+  reply:
+    - "thoughts?"
+    - "what do you think"
+    - "your feedback"
+    - "let me know"
+    - "can you"
+    - "could you"
+
+# Scoring weights
+scoring:
+  vip_sender: 50
+  priority_domain: 30
+  critical_contact: 40
+  high_contact: 20
+  priority_keyword: 15
+  unread: 10
+  recent_4h: 10
+  direct_to: 5
+
+# Priority thresholds
+thresholds:
+  high: 50
+  medium: 25
+
+# Auto-categorization patterns
+auto_rules:
+  ignore_patterns:
+    - subject_contains: "[AUTOMATED]"
+    - subject_contains: "Out of Office"
+    - from_contains: "noreply@"
+    - from_contains: "notifications@"
+  review_patterns:
+    - subject_contains: "FYI"
+    - subject_contains: "[Newsletter]"
