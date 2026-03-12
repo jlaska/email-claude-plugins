@@ -32,18 +32,10 @@ Install `gog` CLI:
 
 ### 2. Setup GTD Labels (One-Time)
 
-Delete old labels and create new ones:
+Create the GTD labels:
 
 ```bash
-# Delete old labels (if they exist)
-gog gmail labels delete "1 GTD/Do now" 2>/dev/null
-gog gmail labels delete "1 GTD/Do soon" 2>/dev/null
-gog gmail labels delete "1 GTD/Delegate" 2>/dev/null
-gog gmail labels delete "1 GTD/File" 2>/dev/null
-gog gmail labels delete "1 GTD/Incubate" 2>/dev/null
-gog gmail labels delete "1 GTD" 2>/dev/null
-
-# Create new labels
+# Create labels
 gog gmail labels create "GTD/Urgent"
 gog gmail labels create "GTD/Action"
 gog gmail labels create "GTD/Reply"
