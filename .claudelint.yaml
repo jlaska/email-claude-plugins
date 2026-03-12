@@ -1,0 +1,15 @@
+strict: true
+
+rules:
+  commands-dir-required:
+    enabled: false
+  commands-exist:
+    enabled: false
+  command-naming:
+    enabled: false
+  command-frontmatter:
+    enabled: false
+  command-sections:
+    enabled: false
+  command-name-format:
+    enabled: false

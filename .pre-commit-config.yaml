@@ -1,0 +1,48 @@
+repos:
+  # Claudelint (stbenjam) - Plugin structure validation
+  - repo: local
+    hooks:
+      - id: claudelint-structure
+        name: claudelint (structure)
+        entry: uvx claudelint --strict
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  # Claudelint (pdugan20) - Security and quality validation
+  - repo: local
+    hooks:
+      - id: claudelint-quality
+        name: claudelint (quality)
+        entry: npx claude-code-lint check-all
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  # Markdownlint - Markdown style checker
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint
+        args: ['--config', '.markdownlint.json', '--ignore-path', '.markdownlintignore']
+
+  # Gitleaks - Secret detection
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  # Pre-commit hooks - General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: ['--fix=lf']

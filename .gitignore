@@ -1,0 +1,16 @@
+# Claudelint
+.claudelint-cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+
+# Secrets baseline
+.secrets.baseline

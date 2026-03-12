@@ -1,7 +1,13 @@
 ---
 name: check-email
 description: AI-powered inbox triage using GTD methodology - categorizes uncategorized emails and applies Gmail labels (GTD/*)
-allowed-tools: Read, Glob, Grep, Bash, Write, Edit
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+  - Write
+  - Edit
 ---
 
 # Check Email
@@ -106,7 +112,7 @@ Output table sorted by priority (newest first within each priority):
 
 | # | Priority | Subject | From | Date | Label | What To Do |
 |---|----------|---------|------|------|-------|------------|
-| 1 | HIGH | [Subject](gmail-link) | sender | date | Urgent | 1-sentence action |
+| 1 | HIGH | [Subject](https://mail.google.com/mail/u/0/#inbox/threadId) | sender | date | Urgent | 1-sentence action |
 
 - **Subject**: Clickable link to `https://mail.google.com/mail/u/0/#inbox/<threadId>`
 - **Priority**: HIGH/MEDIUM/LOW

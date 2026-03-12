@@ -1,0 +1,22 @@
+{
+  "name": "email-claude-plugins",
+  "owner": {
+    "name": "James Laska",
+    "email": "jlaska@redhat.com"
+  },
+  "metadata": {
+    "description": "Email triage and GTD workflow skills for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "email-triage",
+      "description": "AI-powered inbox triage using GTD methodology - categorizes emails and applies Gmail labels",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/check-email"
+      ]
+    }
+  ]
+}
