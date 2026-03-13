@@ -31,7 +31,7 @@ Invoke `/check-email` to:
 | **GTD/Action** | Must DO something - tasks, decisions, document reviews |
 | **GTD/Reply** | Needs written response only - questions, feedback requests |
 | **GTD/Waiting** | Tracking someone else - delegated tasks, pending approvals |
-| **GTD/Review** | Read/digest only - FYI, status updates, newsletters |
+| **GTD/Digest** | Read/digest only - FYI, status updates, newsletters |
 | **GTD/Ignore** | Safe to skip - automated notifications, irrelevant threads |
 | **GTD/Needs Review** | AI confidence <60% - ambiguous signals, flag for manual review |
 
@@ -57,7 +57,7 @@ The user config at `~/.config/email-claude-plugins/config.yaml` can override:
 Find inbox emails without any GTD label:
 
 ```bash
-gog gmail search "in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Review -label:GTD-Ignore" --json --max=20
+gog gmail search "in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Digest -label:GTD-Ignore" --json --max=20
 ```
 
 ### 3. Calculate Priority Score
@@ -92,7 +92,7 @@ Apply GTD methodology from `prompts/categorize.md`:
 | Must DO something (task, decision) | `GTD/Action` |
 | Just needs a written response | `GTD/Reply` |
 | Waiting on someone else | `GTD/Waiting` |
-| FYI / informational | `GTD/Review` |
+| FYI / informational | `GTD/Digest` |
 | Automated / irrelevant | `GTD/Ignore` |
 
 **Decision Rules**:
@@ -120,7 +120,7 @@ Output table sorted by priority (newest first within each priority):
 - **Subject**: Clickable link to `https://mail.google.com/mail/u/0/#inbox/<threadId>`
 - **Priority**: HIGH/MEDIUM/LOW
 - **Label**: The GTD label applied
-- **What To Do**: Brief action summary (or "None" for Review/Ignore)
+- **What To Do**: Brief action summary (or "None" for Digest/Ignore)
 
 ## gog Command Reference
 

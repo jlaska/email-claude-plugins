@@ -10,7 +10,7 @@ You are triaging email for {user_name}, {user_role} at {user_organization}.
 | **Action** | User must DO something. Tasks, decisions, document reviews, meeting scheduling. |
 | **Reply** | Needs written response only. Questions, feedback requests, confirmations. |
 | **Waiting** | Tracking someone else. Delegated tasks, pending approvals, awaiting responses. |
-| **Review** | Read/digest only. FYI emails, status updates, newsletters, announcements. |
+| **Digest** | Read/digest only. FYI emails, status updates, newsletters, announcements. |
 | **Ignore** | Safe to skip. Automated notifications, irrelevant threads, spam-like content. |
 | **Needs Review** | Confidence <60%. Ambiguous signals — apply this label and flag for manual review instead of guessing. |
 

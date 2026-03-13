@@ -49,9 +49,9 @@
           "type": "string",
           "description": "Label for emails waiting on someone else"
         },
-        "review": {
+        "digest": {
           "type": "string",
-          "description": "Label for emails to review/read"
+          "description": "Label for emails to read/digest (no action required)"
         },
         "ignore": {
           "type": "string",

@@ -6,7 +6,7 @@ labels:
   action: "GTD/Action"
   reply: "GTD/Reply"
   waiting: "GTD/Waiting"
-  review: "GTD/Review"
+  digest: "GTD/Digest"
   ignore: "GTD/Ignore"
   needs_review: "GTD/Needs Review"
 
@@ -46,7 +46,7 @@ priority_keywords:
     - "could you"
     - "would you"
 
-# Jira project prefixes for ticket detection scoring (e.g., RHEL, AAP)
+# Jira project prefixes for ticket detection scoring (e.g., PROJ, TEAM)
 jira_projects: []
 
 # Scoring weights

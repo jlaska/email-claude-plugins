@@ -1,6 +1,6 @@
 ---
 name: draft-email
-description: Draft emails in James Laska's voice using his analyzed communication style - greetings, tone, vocabulary, and structural habits derived from 13,917 sent emails
+description: Draft emails in the user's voice using their analyzed communication style - greetings, tone, vocabulary, and structural habits derived from sent emails
 allowed-tools:
   - Read
   - Glob
@@ -11,12 +11,12 @@ allowed-tools:
 
 # Draft Email
 
-Composes emails in James's voice using his voice profile.
+Composes emails in the user's voice using their voice profile.
 
 ## When to Use
 
 Invoke `/draft-email` to:
-- Draft a new email in James's voice
+- Draft a new email in the user's voice
 - Draft a reply to an existing email thread
 - Get a Gmail draft created (ready to review and send from Gmail UI)
 
@@ -111,7 +111,7 @@ Default sign-off is always `Thanks,\nJames` regardless of audience.
 
 ### 6. Draft the Email
 
-Apply James's voice markers from the voice profile (Section 8) as the constant foundation, then
+Apply the user's voice markers from the voice profile (Section 8) as the constant foundation, then
 adjust for the selected tone:
 
 - **Candor**: say what you think without excessive hedging

@@ -44,7 +44,7 @@
 - **Total: 75 points → HIGH**
 
 ### Medium Priority (35 points)
-- From: colleague@redhat.com (priority domain +30)
+- From: colleague@example.com (priority domain +30)
 - Direct recipient (+5)
 - **Total: 35 points → MEDIUM**
 

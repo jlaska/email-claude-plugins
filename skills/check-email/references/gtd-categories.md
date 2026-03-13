@@ -26,7 +26,7 @@
 - Awaiting responses
 - **Tracking someone else's action**
 
-## GTD/Review (Purple)
+## GTD/Digest (Purple)
 - FYI emails
 - Status updates
 - Newsletters

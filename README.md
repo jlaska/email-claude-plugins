@@ -21,9 +21,9 @@ drafts via `gog gmail`.
 |-------|-------|---------|
 | `GTD/Urgent` | Dark Red | Needs attention TODAY - deadlines, escalations, outages |
 | `GTD/Action` | Orange | Must DO something - tasks, decisions, reviews |
-| `GTD/Reply` | Yellow | Written response needed - questions, feedback requests |
-| `GTD/Waiting` | Green | Tracking someone else - delegated, pending approval |
-| `GTD/Review` | Purple | Read/digest only - FYI, status updates, newsletters |
+| `GTD/Reply Needed` | Yellow | Written response needed - questions, feedback requests |
+| `GTD/Waiting For` | Green | Tracking someone else - delegated, pending approval |
+| `GTD/Digest` | Purple | Read/digest only - FYI, status updates, newsletters |
 | `GTD/Ignore` | Gray | Safe to skip - automated notifications, irrelevant |
 | `GTD/Needs Review` | Red | AI confidence <60% - requires manual categorization |
 
@@ -42,9 +42,9 @@ See [gogcli repository](https://github.com/steipete/gogcli) for more details.
 ```bash
 gog gmail labels create "GTD/Urgent"
 gog gmail labels create "GTD/Action"
-gog gmail labels create "GTD/Reply"
-gog gmail labels create "GTD/Waiting"
-gog gmail labels create "GTD/Review"
+gog gmail labels create "GTD/Reply Needed"
+gog gmail labels create "GTD/Waiting For"
+gog gmail labels create "GTD/Digest"
 gog gmail labels create "GTD/Ignore"
 gog gmail labels create "GTD/Needs Review"
 ```
@@ -81,7 +81,7 @@ Found 15 uncategorized emails. Processing...
 | 2 | HIGH | [Production Alert](link) | oncall@ | Mar 10 | Urgent | Check monitoring dashboard |
 | 3 | MEDIUM | [Project Status](link) | PM | Mar 10 | Action | Provide timeline update |
 | 4 | MEDIUM | [Meeting Request](link) | Partner | Mar 10 | Reply | Confirm availability |
-| 5 | LOW | [Weekly Newsletter](link) | news@ | Mar 10 | Review | None |
+| 5 | LOW | [Weekly Newsletter](link) | news@ | Mar 10 | Digest | None |
 
 Applied 15 GTD labels. 2 HIGH priority items need attention today.
 ```
@@ -100,27 +100,27 @@ Override defaults by editing `~/.config/email-claude-plugins/config.yaml`:
 ```yaml
 # Your info
 user:
-  name: "James Laska"
-  email: "jlaska@redhat.com"
+  name: "Your Name"
+  email: "you@example.com"
   role: "Your Role"
-  organization: "Red Hat"
+  organization: "Your Company"
 
 # VIP senders (always high priority)
 vip_senders:
-  - "ceo@redhat.com"
+  - "ceo@example.com"
 
 # Priority domains
 priority_domains:
-  - "redhat.com"
+  - "example.com"
 
-# Jira project prefixes to track (e.g., RHEL, AAP, OCPBUGS)
+# Jira project prefixes to track (e.g., PROJ, TEAM, TRACK)
 jira_projects:
-  - "RHEL"
+  - "PROJ"
 
 # Contact importance overrides
 # importance: "critical" (+40 pts), "high" (+20 pts), "medium"/"low" (context only)
 contacts:
-  - email: "boss@redhat.com"
+  - email: "boss@example.com"
     name: "Boss Name"
     importance: critical
     relationship: "direct manager"
@@ -133,11 +133,11 @@ The plugin learns from your corrections at `~/.config/email-claude-plugins/learn
 
 ```yaml
 sender_overrides:
-  "newsletter@example.com": "GTD/Review"
+  "newsletter@example.com": "GTD/Digest"
 
 subject_patterns:
   - pattern: "Weekly Status"
-    category: "GTD/Review"
+    category: "GTD/Digest"
     confidence: high
 ```
 
@@ -180,7 +180,7 @@ The plugin categorizes emails using GTD methodology:
 2. **Action** - User must DO something (tasks, decisions, reviews)
 3. **Reply** - Needs written response only (questions, feedback)
 4. **Waiting** - Tracking someone else (delegated, pending approval)
-5. **Review** - Read/digest only (FYI, status updates)
+5. **Digest** - Read/digest only (FYI, status updates)
 6. **Ignore** - Safe to skip (automated notifications)
 
 ## Architecture
@@ -260,7 +260,3 @@ MIT License - See LICENSE file for details
 ## Contributing
 
 Contributions welcome! Please open an issue or PR.
-
-## Author
-
-James Laska (jlaska@redhat.com)
