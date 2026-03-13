@@ -1,14 +1,19 @@
-# Claude Email Plugin - GTD Inbox Triage
+# Email Claude Plugin
 
-AI-powered email triage using GTD methodology. Automatically categorizes Gmail inbox emails and applies labels for better email management.
+AI-powered email triage and drafting using GTD methodology. Categorizes Gmail inbox emails, applies labels, and drafts replies in your voice.
 
-## Features
+## Skills
 
-- **Smart Triage**: Uses GTD methodology to categorize emails into 6 categories
-- **Priority Scoring**: Scores emails based on sender, keywords, and recency
-- **Learning System**: Remembers your corrections to improve over time
-- **Customizable**: Override labels, VIPs, and priority domains in user config
-- **Gmail Integration**: Uses `gog gmail` CLI for all Gmail operations
+### `/check-email`
+
+AI-powered inbox triage using GTD methodology. Categorizes uncategorized emails,
+scores priority, and applies Gmail labels.
+
+### `/draft-email`
+
+Drafts emails in your voice using an analyzed communication style (voice profile).
+Supports tone selection, audience calibration, and thread replies. Creates Gmail
+drafts via `gog gmail`.
 
 ## GTD Labels
 
@@ -34,10 +39,7 @@ See [gogcli repository](https://github.com/steipete/gogcli) for more details.
 
 ### 2. Setup GTD Labels (One-Time)
 
-Create the GTD labels:
-
 ```bash
-# Create labels
 gog gmail labels create "GTD/Urgent"
 gog gmail labels create "GTD/Action"
 gog gmail labels create "GTD/Reply"
@@ -58,29 +60,17 @@ git clone https://github.com/jlaska/email-claude-plugins.git
 
 ```bash
 # Config is automatically created at ~/.config/email-claude-plugins/config.yaml
-# Edit to add VIPs, priority domains, custom label names, etc.
 vi ~/.config/email-claude-plugins/config.yaml
-```
-
-### 5. Install Plugin (When Available)
-
-```bash
-# Add to Claude marketplace
-claude plugin marketplace add jlaska/email-claude-plugins
-
-# Install plugin
-claude plugin install check-email@email-claude-plugins
 ```
 
 ## Usage
 
-Simply invoke the skill in Claude Code:
-
 ```
 /check-email
+/draft-email
 ```
 
-### Expected Output
+### `/check-email` Output
 
 ```
 Found 15 uncategorized emails. Processing...
@@ -100,7 +90,8 @@ Applied 15 GTD labels. 2 HIGH priority items need attention today.
 
 ### Plugin Defaults
 
-Default configuration is at `skills/check-email/config/defaults.yaml`.
+- `skills/check-email/config/defaults.yaml`
+- `skills/draft-email/config/defaults.yaml`
 
 ### User Config
 
@@ -150,6 +141,14 @@ subject_patterns:
     confidence: high
 ```
 
+## Voice Profile
+
+`/draft-email` requires a voice profile at `~/.config/email-claude-plugins/voice-profile.md`.
+This file captures your communication style — greetings, tone, vocabulary, and structural habits.
+
+To generate one, see `skills/draft-email/references/README.md`. The email archive
+(`email-archive/fetch_sent.py`) is the data source used to build the profile.
+
 ## Priority Scoring
 
 Emails are scored based on multiple factors:
@@ -168,6 +167,7 @@ Emails are scored based on multiple factors:
 | Direct recipient | +5 | Check if user email is in `to` field |
 
 **Priority Levels**:
+
 - **HIGH**: score >= 50 (needs immediate attention)
 - **MEDIUM**: score >= 25 (should review today)
 - **LOW**: score < 25 (can wait)
@@ -188,38 +188,61 @@ The plugin categorizes emails using GTD methodology:
 ```
 ~/Projects/email-claude-plugins/
 ├── skills/
-│   └── check-email/
+│   ├── check-email/
+│   │   ├── SKILL.md                    # Main skill definition
+│   │   ├── config/
+│   │   │   ├── defaults.yaml           # Default configuration
+│   │   │   └── config-schema.json      # Config schema validation
+│   │   └── references/
+│   │       ├── gtd-categories.md       # GTD category reference
+│   │       └── scoring-rules.md        # Priority scoring rules
+│   └── draft-email/
 │       ├── SKILL.md                    # Main skill definition
 │       ├── config/
 │       │   └── defaults.yaml           # Default configuration
 │       └── references/
-│           ├── gtd-categories.md       # GTD category reference
-│           └── scoring-rules.md        # Priority scoring rules
+│           └── README.md               # Voice profile generation guide
 ├── prompts/
-│   └── categorize.md                   # GTD categorization prompt
+│   ├── categorize.md                   # GTD categorization prompt
+│   └── draft-email.md                  # Email drafting prompt
+├── email-archive/
+│   ├── fetch_sent.py                   # Script to fetch sent emails
+│   ├── style_guide.md                  # Analyzed communication style
+│   └── raw/                            # Raw sent email pages (500/page)
+├── .claude-plugin/
+│   └── marketplace.json
+├── Makefile
+├── .pre-commit-config.yaml
+├── .claudelint.yaml
+├── .claudelintrc.json
+├── .markdownlint.json
 ├── README.md
 └── LICENSE
 
 ~/.config/email-claude-plugins/         # User config (overrides defaults)
 ├── config.yaml                         # Labels, VIPs, contacts, domains
-└── learning.yaml                       # Learned patterns (auto-updated)
+├── learning.yaml                       # Learned patterns (auto-updated)
+└── voice-profile.md                    # Communication style for /draft-email
 ```
+
+## Development
+
+```bash
+make setup       # Install pre-commit hooks
+make lint        # Run all linters
+make lint-fix    # Run linters with auto-fix where possible
+```
+
+Linters include: claudelint, markdownlint, gitleaks, and JSON schema validation.
 
 ## Verification
 
-### Test gog Access
 ```bash
+# Test gog access
 gog gmail search "in:inbox" --json --max=3
-```
 
-### Verify Labels
-```bash
+# Verify labels
 gog gmail labels list | grep GTD
-```
-
-### Test Skill
-```
-/check-email
 ```
 
 ## Recording Corrections
