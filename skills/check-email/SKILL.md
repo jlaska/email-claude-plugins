@@ -106,8 +106,12 @@ Apply GTD methodology from `prompts/categorize.md`:
 For each categorized email:
 
 ```bash
-gog gmail labels modify <threadId> --add="GTD/Action"
+gog gmail labels modify <threadId> --add="<label-from-config>"
 ```
+
+> **Note:** Label names come from user config (`~/.config/email-claude-plugins/config.yaml`),
+> falling back to defaults in `config/defaults.yaml`. The `--add`/`--remove` flags accept
+> either a label name or label ID.
 
 ### 6. Present Results
 
@@ -128,8 +132,8 @@ Output table sorted by priority (newest first within each priority):
 |-----------|---------|
 | Search uncategorized | `gog gmail search "in:inbox -label:GTD" --json --max=20` |
 | Read full email | `gog gmail get <messageId> --json` |
-| Apply label | `gog gmail labels modify <threadId> --add="GTD/Action"` |
-| Remove label | `gog gmail labels modify <threadId> --remove="GTD/Action"` |
+| Apply label | `gog gmail labels modify <threadId> --add="<configured-label>"` |
+| Remove label | `gog gmail labels modify <threadId> --remove="<configured-label>"` |
 | List labels | `gog gmail labels list --json` |
 | Create label | `gog gmail labels create "GTD/Urgent"` |
 
