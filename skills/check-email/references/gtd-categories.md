@@ -38,3 +38,9 @@
 - Marketing emails
 - Irrelevant CC'd threads
 - **Safe to skip or archive**
+
+## GTD/Needs Review (Red)
+- AI confidence below 60%
+- Ambiguous signals (could be multiple categories)
+- Unusual sender/subject combinations
+- **Flag for manual review — do not auto-apply other labels**

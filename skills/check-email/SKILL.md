@@ -33,6 +33,7 @@ Invoke `/check-email` to:
 | **GTD/Waiting** | Tracking someone else - delegated tasks, pending approvals |
 | **GTD/Review** | Read/digest only - FYI, status updates, newsletters |
 | **GTD/Ignore** | Safe to skip - automated notifications, irrelevant threads |
+| **GTD/Needs Review** | AI confidence <60% - ambiguous signals, flag for manual review |
 
 ## Workflow
 
@@ -70,6 +71,8 @@ For each email, calculate score based on `config/defaults.yaml`:
 | Critical contact | +40 | Match `from` in `contacts` with `importance: critical` |
 | High contact | +20 | Match `from` in `contacts` with `importance: high` |
 | Priority keyword | +15 | Match subject against `priority_keywords` |
+| Jira ticket (tracked) | +20 | Regex `\b[A-Z]{2,10}-\d+\b` in subject/body, project in `jira_projects` |
+| Jira ticket (untracked) | +10 | Regex `\b[A-Z]{2,10}-\d+\b` in subject/body, project not in `jira_projects` |
 | Unread | +10 | Check `labelIds` contains `UNREAD` |
 | Recent (<4h) | +10 | Compare `internalDate` to now |
 | Direct recipient | +5 | Check if user email is in `to` (not just `cc`) |

@@ -20,6 +20,7 @@ AI-powered email triage using GTD methodology. Automatically categorizes Gmail i
 | `GTD/Waiting` | Green | Tracking someone else - delegated, pending approval |
 | `GTD/Review` | Purple | Read/digest only - FYI, status updates, newsletters |
 | `GTD/Ignore` | Gray | Safe to skip - automated notifications, irrelevant |
+| `GTD/Needs Review` | Red | AI confidence <60% - requires manual categorization |
 
 ## Installation
 
@@ -43,6 +44,7 @@ gog gmail labels create "GTD/Reply"
 gog gmail labels create "GTD/Waiting"
 gog gmail labels create "GTD/Review"
 gog gmail labels create "GTD/Ignore"
+gog gmail labels create "GTD/Needs Review"
 ```
 
 ### 3. Clone Repository
@@ -120,12 +122,18 @@ vip_senders:
 priority_domains:
   - "redhat.com"
 
+# Jira project prefixes to track (e.g., RHEL, AAP, OCPBUGS)
+jira_projects:
+  - "RHEL"
+
 # Contact importance overrides
-# importance: "critical" (+40 pts) or "high" (+20 pts)
+# importance: "critical" (+40 pts), "high" (+20 pts), "medium"/"low" (context only)
 contacts:
   - email: "boss@redhat.com"
     name: "Boss Name"
     importance: critical
+    relationship: "direct manager"
+    notes: "Weekly 1:1 on Tuesdays"
 ```
 
 ### Learning File
@@ -153,6 +161,8 @@ Emails are scored based on multiple factors:
 | Critical contact | +40 | Match in `contacts` with `importance: critical` |
 | High contact | +20 | Match in `contacts` with `importance: high` |
 | Priority keyword | +15 | Match subject against `priority_keywords` |
+| Jira ticket (tracked) | +20 | Ticket prefix matches `jira_projects` list |
+| Jira ticket (untracked) | +10 | Any other Jira ticket pattern in subject/body |
 | Unread | +10 | Check `labelIds` contains `UNREAD` |
 | Recent (<4h) | +10 | Compare `internalDate` to now |
 | Direct recipient | +5 | Check if user email is in `to` field |

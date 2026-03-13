@@ -11,11 +11,13 @@
 | Priority domain | +30 | Email from important organization domain |
 | High contact | +20 | Known contact marked as high importance |
 
-### Medium-Value Factors (10-15 points)
+### Medium-Value Factors (10-20 points)
 
 | Factor | Points | Rationale |
 |--------|--------|-----------|
 | Priority keyword | +15 | Subject contains urgent/action keywords |
+| Jira ticket (tracked) | +20 | References a project in `jira_projects` list |
+| Jira ticket (untracked) | +10 | References any other Jira ticket pattern |
 | Unread | +10 | User hasn't read it yet |
 | Recent (<4h) | +10 | Fresh email, likely timely |
 

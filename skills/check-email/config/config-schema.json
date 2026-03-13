@@ -56,6 +56,10 @@
         "ignore": {
           "type": "string",
           "description": "Label for emails to ignore"
+        },
+        "needs_review": {
+          "type": "string",
+          "description": "Label for low-confidence categorizations requiring manual review"
         }
       },
       "additionalProperties": false
@@ -78,6 +82,38 @@
       },
       "uniqueItems": true
     },
+    "domains": {
+      "description": "Domain rules with importance and context for AI categorization",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          },
+          "importance": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "context": {
+            "type": "string",
+            "description": "Description of this domain for AI context"
+          }
+        },
+        "required": ["domain"],
+        "additionalProperties": false
+      }
+    },
+    "jira_projects": {
+      "description": "Jira project prefixes for ticket detection scoring",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2,10}$"
+      },
+      "uniqueItems": true
+    },
     "contacts": {
       "description": "Contact importance overrides",
       "type": "array",
@@ -95,8 +131,16 @@
           },
           "importance": {
             "type": "string",
-            "enum": ["critical", "high"],
-            "description": "Contact importance level: 'critical' (+40 pts) or 'high' (+20 pts)"
+            "enum": ["critical", "high", "medium", "low"],
+            "description": "Contact importance: 'critical' (+40 pts), 'high' (+20 pts), 'medium' (context only), 'low' (context only)"
+          },
+          "relationship": {
+            "type": "string",
+            "description": "Contact's relationship to user (e.g., direct manager, direct report)"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional context about this contact (e.g., meeting schedule)"
           }
         },
         "required": ["email", "importance"],
@@ -169,6 +213,11 @@
           "type": "integer",
           "minimum": 0,
           "description": "Points for emails received in last 4 hours"
+        },
+        "jira_ticket": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points for emails referencing tracked Jira tickets"
         },
         "direct_to": {
           "type": "integer",

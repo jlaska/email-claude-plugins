@@ -8,6 +8,7 @@ labels:
   waiting: "GTD/Waiting"
   review: "GTD/Review"
   ignore: "GTD/Ignore"
+  needs_review: "GTD/Needs Review"
 
 # Priority keywords
 priority_keywords:
@@ -22,6 +23,11 @@ priority_keywords:
     - "emergency"
     - "EOD"
     - "end of day"
+    - "immediately"
+    - "immediate"
+    - "escalation"
+    - "blocker"
+    - "time sensitive"
   action:
     - "action required"
     - "action needed"
@@ -29,6 +35,8 @@ priority_keywords:
     - "approval needed"
     - "deadline"
     - "decision needed"
+    - "your input"
+    - "sign off"
   reply:
     - "thoughts?"
     - "what do you think"
@@ -36,6 +44,10 @@ priority_keywords:
     - "let me know"
     - "can you"
     - "could you"
+    - "would you"
+
+# Jira project prefixes for ticket detection scoring (e.g., RHEL, AAP)
+jira_projects: []
 
 # Scoring weights
 scoring:
@@ -44,6 +56,7 @@ scoring:
   critical_contact: 40
   high_contact: 20
   priority_keyword: 15
+  jira_ticket: 20
   unread: 10
   recent_4h: 10
   direct_to: 5
@@ -58,8 +71,11 @@ auto_rules:
   ignore_patterns:
     - subject_contains: "[AUTOMATED]"
     - subject_contains: "Out of Office"
+    - subject_contains: "Automatic reply"
     - from_contains: "noreply@"
+    - from_contains: "no-reply@"
     - from_contains: "notifications@"
   review_patterns:
     - subject_contains: "FYI"
     - subject_contains: "[Newsletter]"
+    - subject_contains: "For your information"
