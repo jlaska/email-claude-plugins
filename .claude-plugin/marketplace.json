@@ -15,7 +15,8 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/check-email"
+        "./skills/check-email",
+        "./skills/draft-email"
       ]
     }
   ]

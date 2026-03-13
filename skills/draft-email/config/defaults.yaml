@@ -1,0 +1,30 @@
+# Default configuration for draft-email skill
+# User-specific overrides live in ~/.config/email-claude-plugins/config.yaml
+
+user:
+  name: "Your Name"
+  email: "you@example.com"
+  role: "your role"
+  organization: "your organization"
+
+style:
+  default_greeting: "Greetings,"
+  default_closing: "Thanks,\n{user.name}"
+  humor: true
+  exclamation_energy: "match"  # match natural frequency; don't restrain enthusiasm
+  emoji_in_prose: false         # never; status emoji only in structured reports
+
+tone:
+  default: "professional"    # recommended default
+  available:
+    - professional           # warm but structured, suitable for most contexts
+    - casual                 # relaxed, colloquial, short
+    - friendly               # warm, enthusiastic, personal
+    - formal                 # structured, measured, still avoids stiff language
+    - concise                # minimal, direct, no pleasantries
+    - persuasive             # direct, specific examples, clear ask
+  infer_from_context: true   # auto-recommend tone based on thread/recipients
+
+draft:
+  temp_file: "/tmp/draft-email.txt"
+  auto_create_gmail_draft: false  # always present for review first; never send automatically

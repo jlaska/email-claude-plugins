@@ -1,6 +1,9 @@
 # Claudelint
 .claudelint-cache/
 
+# Personal email data — locally generated, not committed to source control
+email-archive/
+
 # Python
 __pycache__/
 *.pyc
