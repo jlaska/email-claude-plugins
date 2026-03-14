@@ -6,8 +6,8 @@ AI-powered email triage and drafting using GTD methodology. Categorizes Gmail in
 
 ### `/check-email`
 
-AI-powered inbox triage using GTD methodology. Categorizes uncategorized emails,
-scores priority, and applies Gmail labels.
+AI-powered inbox triage using GTD methodology. Categorizes unread, uncategorized
+emails, scores priority, and applies Gmail labels.
 
 ### `/draft-email`
 
@@ -162,7 +162,6 @@ Emails are scored based on multiple factors:
 | Priority keyword | +15 | Match subject against `priority_keywords` |
 | Jira ticket (tracked) | +20 | Ticket prefix matches `jira_projects` list |
 | Jira ticket (untracked) | +10 | Any other Jira ticket pattern in subject/body |
-| Unread | +10 | Check `labelIds` contains `UNREAD` |
 | Recent (<4h) | +10 | Compare `internalDate` to now |
 | Direct recipient | +5 | Check if user email is in `to` field |
 

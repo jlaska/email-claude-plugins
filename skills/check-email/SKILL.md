@@ -57,7 +57,7 @@ The user config at `~/.config/email-claude-plugins/config.yaml` can override:
 Find inbox emails without any GTD label:
 
 ```bash
-gog gmail search "in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Digest -label:GTD-Ignore" --json --max=20
+gog gmail search "is:unread in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Digest -label:GTD-Ignore" --json --max=20
 ```
 
 ### 3. Calculate Priority Score
@@ -73,7 +73,6 @@ For each email, calculate score based on `config/defaults.yaml`:
 | Priority keyword | +15 | Match subject against `priority_keywords` |
 | Jira ticket (tracked) | +20 | Regex `\b[A-Z]{2,10}-\d+\b` in subject/body, project in `jira_projects` |
 | Jira ticket (untracked) | +10 | Regex `\b[A-Z]{2,10}-\d+\b` in subject/body, project not in `jira_projects` |
-| Unread | +10 | Check `labelIds` contains `UNREAD` |
 | Recent (<4h) | +10 | Compare `internalDate` to now |
 | Direct recipient | +5 | Check if user email is in `to` (not just `cc`) |
 
@@ -130,7 +129,7 @@ Output table sorted by priority (newest first within each priority):
 
 | Operation | Command |
 |-----------|---------|
-| Search uncategorized | `gog gmail search "in:inbox -label:GTD" --json --max=20` |
+| Search uncategorized | `gog gmail search "is:unread in:inbox -label:GTD" --json --max=20` |
 | Read full email | `gog gmail get <messageId> --json` |
 | Apply label | `gog gmail labels modify <threadId> --add="<configured-label>"` |
 | Remove label | `gog gmail labels modify <threadId> --remove="<configured-label>"` |
