@@ -116,11 +116,12 @@ gog gmail labels modify <threadId> --add="<label-from-config>"
 
 Output table sorted by priority (newest first within each priority):
 
-| # | Priority | Subject | From | Date | Label | What To Do |
-|---|----------|---------|------|------|-------|------------|
-| 1 | HIGH | [Subject](https://mail.google.com/mail/u/0/#inbox/threadId) | sender | date | Urgent | 1-sentence action |
+| # | Priority | Subject | From | Date | Label | What To Do | Link |
+|---|----------|---------|------|------|-------|------------|------|
+| 1 | HIGH | Subject text | sender | date | Urgent | 1-sentence action | [view](https://mail.google.com/mail/u/0/#inbox/threadId) |
 
-- **Subject**: Clickable link to `https://mail.google.com/mail/u/0/#inbox/<threadId>`
+- **Subject**: The email subject line (plain text)
+- **Link**: Short markdown link labeled `view` pointing to `https://mail.google.com/mail/u/0/#inbox/<threadId>`
 - **Priority**: HIGH/MEDIUM/LOW
 - **Label**: The GTD label applied
 - **What To Do**: Brief action summary (or "None" for Digest/Ignore)
