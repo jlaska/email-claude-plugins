@@ -96,9 +96,10 @@ Apply GTD methodology from `prompts/categorize.md`:
 
 **Decision Rules**:
 1. Check `learning.yaml` for sender/subject patterns first
-2. **Urgent wins** - if needs attention today, use Urgent (not Action)
-3. One label only - pick the single best fit
-4. Consider sender importance - critical contacts bias toward Urgent/Action
+2. **Notification exceptions** - If an email matches an `ignore_pattern` (e.g., `from_contains: "noreply@"`), but the email body contains `@{user_email}` (user is @-mentioned) AND the actual commenter/sender identified in the body is a `critical` or `high` importance contact, then **skip auto-ignore** and categorize based on content. Common notification senders: `comments-noreply@docs.google.com`, `drive-shares-dm-noreply@google.com`.
+3. **Urgent wins** - if needs attention today, use Urgent (not Action)
+4. One label only - pick the single best fit
+5. Consider sender importance - critical contacts bias toward Urgent/Action
 
 ### 5. Apply Labels in Gmail
 
