@@ -75,6 +75,8 @@ For each email, calculate score based on `config/defaults.yaml`:
 | Jira ticket (untracked) | +10 | Regex `\b[A-Z]{2,10}-\d+\b` in subject/body, project not in `jira_projects` |
 | Recent (<4h) | +10 | Compare `internalDate` to now |
 | Direct recipient | +5 | Check if user email is in `to` (not just `cc`) |
+| Name mention (VIP/critical/high) | +25 | Match `name_variants` in body (word-boundary, case-insensitive), sender is VIP/critical/high |
+| Name mention (other) | +10 | Match `name_variants` in body (word-boundary, case-insensitive), any sender |
 
 **Priority Levels**:
 - HIGH: score >= 50
@@ -97,9 +99,10 @@ Apply GTD methodology from `prompts/categorize.md`:
 **Decision Rules**:
 1. Check `learning.yaml` for sender/subject patterns first
 2. **Notification exceptions** - If an email matches an `ignore_pattern` (e.g., `from_contains: "noreply@"`), but the email body contains `@{user_email}` (user is @-mentioned) AND the actual commenter/sender identified in the body is a `critical` or `high` importance contact, then **skip auto-ignore** and categorize based on content. Common notification senders: `comments-noreply@docs.google.com`, `drive-shares-dm-noreply@google.com`.
-3. **Urgent wins** - if needs attention today, use Urgent (not Action)
-4. One label only - pick the single best fit
-5. Consider sender importance - critical contacts bias toward Urgent/Action
+3. **Name-mention escalation** - If an email would be categorized as Digest or Ignore, but the email body contains a word-boundary match for any `user.name_variants` (case-insensitive), AND the sender (or actual sender for notification emails) is a VIP, critical, or high importance contact, then escalate to **Needs Review** instead. This ensures the user manually reviews emails where they're personally called out by name.
+4. **Urgent wins** - if needs attention today, use Urgent (not Action)
+5. One label only - pick the single best fit
+6. Consider sender importance - critical contacts bias toward Urgent/Action
 
 ### 5. Apply Labels in Gmail
 

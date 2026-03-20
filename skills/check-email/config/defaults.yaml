@@ -60,6 +60,8 @@ scoring:
   unread: 10
   recent_4h: 10
   direct_to: 5
+  name_mention_vip: 25      # VIP/critical/high contact mentions user by name
+  name_mention_other: 10    # any sender mentions user by name
 
 # Priority thresholds
 thresholds:

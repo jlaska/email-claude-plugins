@@ -34,3 +34,9 @@ Some emails from noreply@ addresses relay actions by real people:
 - **Google Drive shares** (`drive-shares-dm-noreply@google.com`)
 
 For these, identify the **actual person** from the email body. If that person is a critical or high importance contact AND they @-mention the user, categorize based on content — do NOT auto-ignore.
+
+## Name Mentions
+
+If the email body contains the user's name (from `user.name_variants` — word-boundary match, case-insensitive), and the sender is a VIP or critical/high contact:
+- If category would be Digest or Ignore → escalate to **Needs Review**
+- Other categories (Action, Reply, Urgent) are already high-attention — no change needed

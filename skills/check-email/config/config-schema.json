@@ -25,6 +25,13 @@
         "organization": {
           "type": "string",
           "description": "User's organization or company name"
+        },
+        "name_variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Name variants to detect word-boundary mentions in email body (e.g., last name, full name)"
         }
       },
       "additionalProperties": false
@@ -223,6 +230,16 @@
           "type": "integer",
           "minimum": 0,
           "description": "Points for emails sent directly to user"
+        },
+        "name_mention_vip": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points when VIP/critical/high contact mentions user by name in body"
+        },
+        "name_mention_other": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points when any sender mentions user by name in body"
         }
       },
       "additionalProperties": false
