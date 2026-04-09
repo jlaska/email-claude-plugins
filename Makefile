@@ -23,7 +23,7 @@ install-hooks:
 	uvx pre-commit install
 
 update:
-	claude plugins update email-triage
+	claude plugins update email-triage@email-claude-plugins
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
