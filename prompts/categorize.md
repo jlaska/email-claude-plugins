@@ -40,3 +40,7 @@ For these, identify the **actual person** from the email body. If that person is
 If the email body contains the user's name (from `user.name_variants` — word-boundary match, case-insensitive), and the sender is a VIP or critical/high contact:
 - If category would be Digest or Ignore → escalate to **Needs Review**
 - Other categories (Action, Reply, Urgent) are already high-attention — no change needed
+
+## VIP Sender Escalation
+
+If the email sender (or actual sender for notification emails) is a VIP (`vip_senders`), and the email would be categorized as Digest or Ignore, escalate to **Needs Review** instead. VIP communications always warrant manual review even when content appears purely informational.
