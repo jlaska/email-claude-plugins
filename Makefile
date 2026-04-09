@@ -1,4 +1,4 @@
-.PHONY: lint lint-fix setup install-hooks clean help
+.PHONY: lint lint-fix setup install-hooks clean update help
 
 help:
 	@echo "Available targets:"
@@ -7,6 +7,7 @@ help:
 	@echo "  make setup         - Install pre-commit hooks"
 	@echo "  make install-hooks - Install pre-commit git hooks"
 	@echo "  make clean         - Remove generated files"
+	@echo "  make update        - Update the email-triage Claude plugin to latest version"
 
 lint:
 	uvx pre-commit run --all-files
@@ -20,6 +21,9 @@ setup: install-hooks
 
 install-hooks:
 	uvx pre-commit install
+
+update:
+	claude plugins update email-triage
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
