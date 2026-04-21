@@ -51,13 +51,14 @@ The user config at `~/.config/email-claude-plugins/config.yaml` can override:
 - VIP senders
 - Priority domains
 - Contact importance levels
+- `max_emails` (default: 50) — emails fetched and processed per triage run
 
 ### 2. Fetch Uncategorized Emails
 
 Find inbox emails without any GTD label:
 
 ```bash
-gog gmail search "is:unread in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Digest -label:GTD-Ignore" --json --max=20
+gog gmail search "is:unread in:inbox -label:GTD-Urgent -label:GTD-Action -label:GTD-Reply -label:GTD-Waiting -label:GTD-Digest -label:GTD-Ignore" --json --max={max_emails}
 ```
 
 ### 3. Calculate Priority Score

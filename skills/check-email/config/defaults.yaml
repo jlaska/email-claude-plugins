@@ -1,5 +1,8 @@
 # Default configuration (user config overrides these)
 
+# Maximum emails to fetch and process per triage run
+max_emails: 50
+
 # GTD label names
 labels:
   urgent: "GTD/Urgent"

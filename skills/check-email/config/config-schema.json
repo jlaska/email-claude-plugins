@@ -305,6 +305,11 @@
         }
       },
       "additionalProperties": false
+    },
+    "max_emails": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum emails to fetch and process per triage run (default: 50)"
     }
   },
   "additionalProperties": false
